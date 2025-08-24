@@ -1,2 +1,3 @@
-# zamani-x
+# StellarX
+
 A sandbox fintech platform for cross-border payments and stablecoin transactions. Built with Go and designed with clean architecture. Supports multi-wallet management, deposits, swaps, transfers, FX rate simulation, and audit logging for compliance.
