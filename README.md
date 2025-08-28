@@ -439,61 +439,143 @@ View interactive API docs:
 
 ---
 
+## 🗺️ Entity Relationship Diagram (ERD)
+
+````mermaid
+erDiagram
+    USER ||--o{ WALLET : "1:N"
+    WALLET ||--o{ BALANCE : "1:N"
+    WALLET ||--o{ TRANSACTION : "1:N sender"
+    WALLET ||--o{ TRANSACTION : "1:N receiver"
+    USER ||--o{ AUDIT_LOG : "1:N"
+    WALLET ||--o{ AUDIT_LOG : "1:N (optional)"
+
+    USER {
+        uint id PK
+        string email
+        string phone
+        string password
+        datetime created_at
+    }
+
+    WALLET {
+        uint id PK
+        uint user_id FK
+        string label
+        datetime created_at
+        datetime updated_at
+    }
+
+    BALANCE {
+        uint id PK
+        uint wallet_id FK
+        string currency
+        float amount
+        datetime created_at
+        datetime updated_at
+    }## 🗺️ Entity Relationship Diagram (ERD)
+
 ```mermaid
 erDiagram
     USER ||--o{ WALLET : "1:N"
     WALLET ||--o{ BALANCE : "1:N"
-    WALLET ||--o{ TRANSACTION : "1:N (sender)"
-    WALLET ||--o{ TRANSACTION : "1:N (receiver)"
+    WALLET ||--o{ TRANSACTION : "1:N sender"
+    WALLET ||--o{ TRANSACTION : "1:N receiver"
     USER ||--o{ AUDIT_LOG : "1:N"
+    WALLET ||--o{ AUDIT_LOG : "1:N (optional)"
 
     USER {
-        uint id
+        uint id PK
         string email
         string phone
+        string password
+        datetime created_at
     }
 
     WALLET {
-        uint id
-        uint user_id
+        uint id PK
+        uint user_id FK
         string label
+        datetime created_at
+        datetime updated_at
     }
 
     BALANCE {
-        uint id
-        uint wallet_id
+        uint id PK
+        uint wallet_id FK
         string currency
         float amount
+        datetime created_at
+        datetime updated_at
     }
 
     TRANSACTION {
-        uint id
+        uint id PK
         string tx_type
-        uint sender_wallet_id
-        uint receiver_wallet_id
+        uint sender_wallet_id FK
+        uint receiver_wallet_id FK
         string from_currency
         string to_currency
         float amount
-        float fx_rate
         float converted_amount
+        float fx_rate
+        string status
+        datetime created_at
     }
 
     AUDIT_LOG {
-        uint id
-        uint user_id
+        uint id PK
+        uint user_id FK
+        uint wallet_id FK
         string ip_address
         string device
         string browser
         string country
+        string path
+        string method
+        datetime created_at
     }
+````
+
+### Schema Notes
+
+- **Compliance Mode**: `AuditLog` tracks IP, device, browser, country
+- **FX Swaps**: `Transaction` stores `fx_rate`, `converted_amount`
+- **Multi-currency**: `Balance` supports `cNGN`, `cXAF`, `USDx`, `EURx`
+- **Auto-convert**: `Transfer` uses `Transaction` with sender/receiver
+
+  TRANSACTION {
+  uint id PK
+  string tx_type
+  uint sender_wallet_id FK
+  uint receiver_wallet_id FK
+  string from_currency
+  string to_currency
+  float amount
+  float converted_amount
+  float fx_rate
+  string status
+  datetime created_at
+  }
+
+  AUDIT_LOG {
+  uint id PK
+  uint user_id FK
+  uint wallet_id FK
+  string ip_address
+  string device
+  string browser
+  string country
+  string path
+  string method
+  datetime created_at
+  }
+
 ```
 
-**Prototype Name**: **StellarX**  
-**Mission**: **Operation Borderless**  
-**Built in**: **7 days**
-
-```
-
----
-
+### Schema Notes
+- **Compliance Mode**: `AuditLog` tracks IP, device, browser, country
+- **FX Swaps**: `Transaction` stores `fx_rate`, `converted_amount`
+- **Multi-currency**: `Balance` supports `cNGN`, `cXAF`, `USDx`, `EURx`
+- **Auto-convert**: `Transfer` uses `Transaction` with sender/receiver
 ```
