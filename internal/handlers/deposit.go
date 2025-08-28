@@ -9,16 +9,18 @@ import (
 
 type DepositHandler struct {
 	DepositService *services.DepositService
+	WalletService *services.WalletService
 }
 
-func NewDepositHandler(d *services.DepositService) *DepositHandler {
+func NewDepositHandler(d *services.DepositService, w *services.WalletService) *DepositHandler {
 	return &DepositHandler{
 		DepositService: d,
+		WalletService: w,
 	}
 }
 
 type DepositInput struct{
-	WalletID uint		`json:"wallet_id" binding:"required"`
+	UserId uint		`json:"user_id" binding:"required"`
 	Currency string 	`json:"currency" binding:"required"`
 	Amount float64		`json:"amount" binding:"required"`
 }
@@ -31,16 +33,22 @@ func (d *DepositHandler) Handle(c *gin.Context) {
 		return
 	}
 
-	
+	// Get wallet by user id
+	wallet, err := d.WalletService.GetWalletByUserID(input.UserId)
+	if err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"erro": "wallet with the user id not found"})
+		return
+	}
+
 	// call deposit service 
-	transaction, err := d.DepositService.Deposit(input.WalletID, input.Currency, input.Amount)
+	transaction, err := d.DepositService.Deposit(wallet.ID, input.Currency, input.Amount)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"message": "deposit",
+		"message": "deposit successful",
 		"body": gin.H{"transaction-details": transaction},
 	})
 }

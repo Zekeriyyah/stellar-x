@@ -14,7 +14,8 @@ func Run() {
 		&models.Balance{},
 		&models.Wallet{},
 		&models.AuditLog{},
-		&models.AuditLog{},
+		&models.Transaction{},
+
 	)
 	if err != nil {
 		log.Fatal("❌ Migration failed:", err)

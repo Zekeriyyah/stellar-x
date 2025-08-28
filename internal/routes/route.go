@@ -42,7 +42,7 @@ func SetupRouter(r *gin.Engine) *gin.Engine {
 	// Initialize handlers
 	userHandler := handlers.NewUserHandler(userService)
 	walletHandler := handlers.NewWalletHandler(walletService, userService)
-	depositHandler := handlers.NewDepositHandler(depositService)
+	depositHandler := handlers.NewDepositHandler(depositService, walletService)
 	auditLogHandler := handlers.NewAuditLogHandler(auditLogService)
 	swapHandler := handlers.NewSwapHandler(swapService)
 	transferHandler := handlers.NewTransferHandler(transferService)
