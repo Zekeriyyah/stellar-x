@@ -439,6 +439,55 @@ View interactive API docs:
 
 ---
 
+```mermaid
+erDiagram
+    USER ||--o{ WALLET : "1:N"
+    WALLET ||--o{ BALANCE : "1:N"
+    WALLET ||--o{ TRANSACTION : "1:N (sender)"
+    WALLET ||--o{ TRANSACTION : "1:N (receiver)"
+    USER ||--o{ AUDIT_LOG : "1:N"
+
+    USER {
+        uint id
+        string email
+        string phone
+    }
+
+    WALLET {
+        uint id
+        uint user_id
+        string label
+    }
+
+    BALANCE {
+        uint id
+        uint wallet_id
+        string currency
+        float amount
+    }
+
+    TRANSACTION {
+        uint id
+        string tx_type
+        uint sender_wallet_id
+        uint receiver_wallet_id
+        string from_currency
+        string to_currency
+        float amount
+        float fx_rate
+        float converted_amount
+    }
+
+    AUDIT_LOG {
+        uint id
+        uint user_id
+        string ip_address
+        string device
+        string browser
+        string country
+    }
+```
+
 **Prototype Name**: **StellarX**  
 **Mission**: **Operation Borderless**  
 **Built in**: **7 days**
