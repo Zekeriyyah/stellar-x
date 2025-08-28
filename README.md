@@ -1,21 +1,9 @@
-Based on your **Insomnia collection** and the **Operation Borderless** mission, here's a **professional, two-level collapsible `README.md`** that mirrors your folder structure and includes real test data.
-
-This README will:
-
-- ✅ Use your exact endpoint names and requests
-- ✅ Show real payloads from your tests
-- ✅ Be GitHub-compatible with `<details>` and `<summary>`
-- ✅ Prove end-to-end functionality
-
----
-
-````markdown
 # 🌍 StellarX – Operation Borderless
 
 **A stablecoin-powered cross-border payment sandbox** built in **7 days**.  
 Simulates real-time FX swaps, multi-currency wallets, and instant transfers across African and global currencies.
 
-> "The previous applicant took 14 days. You're doing it in 7."
+>
 
 ---
 
@@ -50,7 +38,6 @@ Simulates real-time FX swaps, multi-currency wallets, and instant transfers acro
 ```http
 GET /ping
 ```
-````
 
 #### Response
 
@@ -458,5 +445,6 @@ View interactive API docs:
 
 ```
 
+---
 
 ```
