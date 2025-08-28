@@ -441,40 +441,6 @@ View interactive API docs:
 
 ## 🗺️ Entity Relationship Diagram (ERD)
 
-````mermaid
-erDiagram
-    USER ||--o{ WALLET : "1:N"
-    WALLET ||--o{ BALANCE : "1:N"
-    WALLET ||--o{ TRANSACTION : "1:N sender"
-    WALLET ||--o{ TRANSACTION : "1:N receiver"
-    USER ||--o{ AUDIT_LOG : "1:N"
-    WALLET ||--o{ AUDIT_LOG : "1:N (optional)"
-
-    USER {
-        uint id PK
-        string email
-        string phone
-        string password
-        datetime created_at
-    }
-
-    WALLET {
-        uint id PK
-        uint user_id FK
-        string label
-        datetime created_at
-        datetime updated_at
-    }
-
-    BALANCE {
-        uint id PK
-        uint wallet_id FK
-        string currency
-        float amount
-        datetime created_at
-        datetime updated_at
-    }## 🗺️ Entity Relationship Diagram (ERD)
-
 ```mermaid
 erDiagram
     USER ||--o{ WALLET : "1:N"
@@ -535,4 +501,4 @@ erDiagram
         string method
         datetime created_at
     }
-````
+```
