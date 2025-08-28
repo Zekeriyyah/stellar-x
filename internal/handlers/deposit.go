@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/Zekeriyyah/stellar-x/internal/services"
@@ -35,6 +36,8 @@ func (d *DepositHandler) Handle(c *gin.Context) {
 
 	// Get wallet by user id
 	wallet, err := d.WalletService.GetWalletByUserID(input.UserId)
+	log.Print(wallet)
+
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"erro": "wallet with the user id not found"})
 		return

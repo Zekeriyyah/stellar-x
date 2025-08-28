@@ -13,7 +13,6 @@ type Transaction struct {
 	ConvertedAmount  float64   `json:"converted_amount"`
 	FxRate           float64   `json:"fx_rate"`
 	Status 			 string	   `gorm:"not null;default:'completed'" json:"status"`
-	TxHash 			 string    `gorm:"size:66;uniqueIndex" json:"tx_hash,omitempty"`
 	CreatedAt        time.Time `json:"created_at"`
 
 	// Relations

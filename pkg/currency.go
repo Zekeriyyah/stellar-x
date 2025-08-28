@@ -18,11 +18,11 @@ func MapStablecoinToISO(currency string) string {
 
 // IsAfricanCurrency checks if currency is African
 func IsAfricanCurrency(currency string) bool {
-	return currency == "NGN" || currency == "XAF" || currency == "ZAR" || currency == "KES" || currency == "GHS"
+	return currency == "ngn" || currency == "xaf" || currency == "zar" || currency == "kes" || currency == "ghs"
 }
 
 func ScrapeQuery(query string) []string {
-	currencies := []string{"NGN", "XAF", "USD", "EUR"}
+	currencies := []string{"NGN", "XAF", "USD", "EUR", "ngn", "xaf", "usd", "eur"}
 	
 	presentCurr := []string{}
 	for i:=0; i < len(currencies); i++ {

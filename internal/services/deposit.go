@@ -49,19 +49,24 @@ func (s *DepositService) Deposit(walletID uint, currency string, amount float64)
 	// update amount in balance
 	balance.Amount += amount
 	
-	// Create transaction record
+	// After updating balance
+	if err := s.BalanceRepo.Update(balance); err != nil {
+		return nil, errors.New("failed to update balance")
+	}
+
+	// Create transaction
 	transaction := &models.Transaction{
-		TxType:       "deposit",
+		TxType:         "deposit",
 		SenderWalletID: &walletID,
-		FromCurrency: currency,
-		Amount:       amount,
-		CreatedAt:    time.Now(),
+		FromCurrency:   currency,
+		Amount:         amount,
+		Status:         "completed",
+		CreatedAt:      time.Now(),
 	}
 
-	// Save transaction
+	// Save to DB
 	if err := s.TransactionRepo.CreateTransaction(transaction); err != nil {
-		return nil, errors.New("failed to save transaction")
+		return nil, errors.New("failed to save transaction: " + err.Error())
 	}
-
 	return transaction, nil
 }

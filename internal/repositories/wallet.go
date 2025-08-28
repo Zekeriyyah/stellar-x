@@ -1,6 +1,8 @@
 package repositories
 
 import (
+	"log"
+
 	"github.com/Zekeriyyah/stellar-x/internal/models"
 	"gorm.io/gorm"
 )
@@ -46,9 +48,12 @@ func (r *WalletRepository) CreateWalletWithBalanceTx(userId uint, label string) 
 		return tx.Create(&balances).Error
 	})
 	if err != nil {
+		log.Print("ERROR AFTER CREATE WALLET TRANSACTION")
 		return &models.Wallet{}, err
 	}
 	wallet.Balances = balances
+
+	
 	return &wallet, nil
 }
 

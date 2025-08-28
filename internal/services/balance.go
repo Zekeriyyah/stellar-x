@@ -65,7 +65,12 @@ func (s *BalanceService) Decrease(walletID uint, currency string, amount float64
 	}
 
 	balance.Amount -= amount
-	return s.BalanceRepo.Update(balance)
+
+	// ✅ Save updated balance to database
+	if err := s.BalanceRepo.Update(balance); err != nil {
+		return errors.New("failed to update balance")
+	}
+	return nil
 }
 
 // UpdateInTx updates balance within a transaction (for swaps/transfers)

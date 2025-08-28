@@ -64,7 +64,13 @@ Never make up rates.`
 		},
 	)
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf("OpenAI API error: %w", err)
 	}
+
+	// ✅ Safe: Check if choices exist
+	if len(resp.Choices) == 0 {
+		return "No response from AI", nil
+	}
+
 	return resp.Choices[0].Message.Content, nil
 }

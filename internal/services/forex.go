@@ -4,7 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
+	"strings"
 
 	"github.com/Zekeriyyah/stellar-x/pkg"
 )
@@ -36,6 +38,9 @@ func (s *FXService) GetRate(from, to string) (float64, error) {
 	// Map stablecoins to fiat
 	fiatFrom := pkg.MapStablecoinToISO(from)
 	fiatTo := pkg.MapStablecoinToISO(to)
+
+	fiatFrom = strings.ToLower(fiatFrom)
+	fiatTo = strings.ToLower(fiatTo)
 
 	if fiatFrom == fiatTo {
 		return 1.0, nil
@@ -105,7 +110,8 @@ func (s *FXService) getCoinGeckoRate(from, to string) (float64, error) {
 		return 0, fmt.Errorf("currency not found: %s", to)
 	}
 
+	log.Print(fromVal.Value, toVal.Value)
 	// Convert: (from / USD) / (to / USD) = from/to
-	rate := fromVal.Value / toVal.Value
+	rate := toVal.Value / fromVal.Value
 	return rate, nil
 }
