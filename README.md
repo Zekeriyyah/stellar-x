@@ -18,6 +18,106 @@ Simulates real-time FX swaps, multi-currency wallets, and instant transfers acro
 
 ---
 
+## 🚀 How to Run Locally
+
+Follow these steps to run **StellarX** on your machine.
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/your-username/stellarx.git
+cd stellarx
+```
+
+### 2. Set Environment Variables
+
+```bash
+cp .env.example .env
+```
+
+> ✅ No changes needed for default setup
+
+### 3. Install Dependencies
+
+```bash
+# Requires Docker and Docker Compose Plugin
+sudo apt install -y docker.io docker-compose-plugin
+```
+
+### 4. Build and Run
+
+```bash
+# Start all services
+docker compose up --build -d
+
+# Verify services are running
+docker compose ps
+```
+
+### 5. Test the API
+
+```bash
+curl http://localhost/api/v1/ping
+```
+
+✅ Expected: `{"message":"pong"}`
+
+### 6. Access Services
+
+- **App API**: `http://localhost/api/v1/ping`
+- **pgAdmin**: `http://localhost:5050` (admin@stellar.com / admin123)
+
+### 7. Stop Services
+
+```bash
+docker compose down
+```
+
+---
+
+### ⚙️ Project Structure
+
+```
+stellarx/
+├── cmd/
+│   └── server/
+│       └── main.go        # Entry point
+├── internal/
+│   ├── models/            # Database models
+│   ├── repository/        # DB access
+│   ├── services/          # Business logic
+│   ├── handlers/          # HTTP layer
+│   └── database/          # DB connection
+├── config/
+│   └── nginx.conf         # Reverse proxy config
+├── docker-compose.yml     # Services orchestration
+├── Dockerfile             # Go app container
+└── .env.example           # Environment template
+```
+
+---
+
+### 🧪 Testing with Insomnia
+
+Import the Insomnia collection:
+
+1. Open [Insomnia](https://insomnia.rest/download)
+2. Go to `File → Import`
+3. Select `StellarX_Sandbox.yaml`
+4. Run requests in order: `Health Check → Wallet → Deposit → Swap → Transfer`
+
+---
+
+### 🐳 Docker Compose Services
+
+| Service   | Port | Purpose               |
+| --------- | ---- | --------------------- |
+| `app`     | 8080 | Go backend            |
+| `db`      | 5040 | PostgreSQL            |
+| `pgadmin` | 5050 | Database UI           |
+| `nginx`   | 80   | Reverse proxy         |
+| `certbot` | 443  | HTTPS (Let’s Encrypt) |
+
 ## 🔐 Admin Credentials
 
 - **pgAdmin Email**: `admin@stellar.com`
@@ -434,10 +534,7 @@ GET /api/v1/ask?q=what+is+the+latest+most+stable+coin
 
 ## 📚 API Documentation
 
-View interactive API docs:  
-👉 [Insomnia Workspace](https://insomnia.rest/docs/your-link)
-
----
+## View interactive API docs:
 
 ## 🗺️ Entity Relationship Diagram (ERD)
 

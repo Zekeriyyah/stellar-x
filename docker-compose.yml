@@ -10,6 +10,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: stellar_x
+      DATABASE_URL=postgres://postgres:postgres@db:5432/stellar_x?sslmode=disable
     ports:
       - "5040:5432"
     volumes:
