@@ -42,7 +42,7 @@ func(s *UserService) CreateUser(user *models.User) (int, string) {
 	return 200, "user created successfully"
 }
 
-func (s *UserService) Login(email, password string) (string, int, string) {
+func (s *UserService) Login(email, password string) (string, uint, int, string) {
 
 	// get user from database using email
 	// verify that user password is correct
@@ -50,19 +50,19 @@ func (s *UserService) Login(email, password string) (string, int, string) {
 
 	user, err :=s.userRepo.FindUserByEmail(email) 
 	if err != nil {
-		return "", http.StatusNotFound, "user not found"
+		return "",0, http.StatusNotFound, "user not found"
 	}
 
 	if !user.VerifyPassword(password) {
-		return "", http.StatusUnauthorized, "password verification failed"
+		return "",0, http.StatusUnauthorized, "password verification failed"
 	}
 
 	tokenStr, err := pkg.GeneratJWT(user.ID, time.Now().Add(3*time.Hour))
 	if err != nil {
-		return "", http.StatusInternalServerError, "invalid input"
+		return "",0, http.StatusInternalServerError, "invalid input"
 	}
 
-	return tokenStr, 200, "login successful"
+	return tokenStr, user.ID, 200, "login successful"
 }
 
 func(u *UserService) GetUserByID(id uint) (*models.User, int, string) {

@@ -162,14 +162,15 @@ GET /ping
 #### Request
 
 ```http
-POST /api/v1/users
+POST /api/signup
 Content-Type: application/json
 ```
 
 ```json
 {
-  "email": "awwalEUR@gmail.com",
-  "phone": "+237670045009"
+  "email": "awwalcodestar@america.com",
+  "phone": "+1870985847",
+  "password": "@america"
 }
 ```
 
@@ -177,14 +178,46 @@ Content-Type: application/json
 
 ```json
 {
-  "message": "User created successfully",
-  "userId": 12,
-  "email": "awwalEUR@gmail.com",
-  "phone": "+237670045009"
+  "message": "user registered successfully",
+  "user": {
+    "created_at": "2025-08-30T20:19:42.689537611Z",
+    "email": "awwalcodestar@america.com",
+    "id": 2
+  }
 }
 ```
 
 ✅ User created for wallet association
+
+</details>
+
+<details>
+<summary>✅ GET /api/login</summary>
+
+#### Request
+
+```http
+GET /api/login
+Content-Type: application/json
+```
+
+```json
+{
+  "email": "awwalcodestar@nigeria.com",
+  "password": "@nigeria"
+}
+```
+
+#### Response
+
+```json
+{
+  "message": "login successful",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJwdXJwb3NlIjoiIiwiZXhwIjoxNzU2NTkyNDcyLCJpYXQiOjE3NTY1OTEwMzJ9.lcFEKUoGCPXrphagGFpmg4Zth_3ad62GfzNj0MgIeX4"
+}
+```
+
+✅ User logged in.
 
 </details>
 

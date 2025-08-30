@@ -73,13 +73,13 @@ func(u *UserHandler) Login(c *gin.Context) {
 		return
 	}
 
-	tokenStr, status, msg := u.UserService.Login(input.Email, input.Password)
+	tokenStr, userId, status, msg := u.UserService.Login(input.Email, input.Password)
 	if status != http.StatusOK {
 		c.JSON(status, gin.H{"error": msg})
 		return
 	}	
 	
-	c.JSON(http.StatusOK, gin.H{"message": msg, "token": tokenStr})
+	c.JSON(http.StatusOK, gin.H{"message": msg, "user_id": userId, "token": tokenStr})
 }
 
 // GetUserByID handles GET /api/v1/users/:id
