@@ -15,16 +15,7 @@ func InitDB() *gorm.DB {
 
 	// either using postgres on render or from docker
 	if os.Getenv("RENDER") == "true" {
-		
-		dsn = fmt.Sprintf(
-		"host=%s user=%s password=%s dbname=%s port=%s sslmode=%s",
-		os.Getenv("DB_HOST"),
-		os.Getenv("DB_USER"),
-		os.Getenv("DB_PASSWORD"),
-		os.Getenv("DB_NAME"),
-		os.Getenv("DB_PORT"),
-		os.Getenv("DB_SSLMODE"),
-	)
+		dsn = os.Getenv("DATABASE_URL")
 	} else {
 		dsn = "postgres://postgres:postgres@db:5432/stellar_x?sslmode=disable"
 	}	
