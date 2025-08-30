@@ -9,7 +9,7 @@ import (
 const AuditInfoKey = "audit_info"
 type AuditInfo struct {
 	UserID		uint
-	WalletID	uint
+	WalletID	*uint
 	IPAddress 	string
     Browser 	string
     Device  	string

@@ -18,10 +18,10 @@ func NewAuditLogService(auditRepo *repositories.AuditLogRepository) *AuditLogSer
 }
 
 // LogRequest creates an audit log entry
-func (s *AuditLogService) LogRequest(userID uint, walletID uint, ip, device, browser, country, endpoint, method string) error {
+func (s *AuditLogService) LogRequest(userID uint, walletID *uint, ip, device, browser, country, endpoint, method string) error {
+
 	log := &models.AuditLog{
 		UserID:    userID,
-		WalletID:  &walletID,
 		IPAddress: ip,
 		Device:    device,
 		Browser:   browser,
@@ -30,7 +30,11 @@ func (s *AuditLogService) LogRequest(userID uint, walletID uint, ip, device, bro
 		Method:	   method,
 		CreatedAt: time.Now(),
 	}
-
+ 
+	if walletID != nil {
+		log.WalletID = walletID
+	}
+	
 	return s.AuditRepo.Create(log)
 }
 
