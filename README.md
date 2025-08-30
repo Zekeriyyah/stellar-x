@@ -213,7 +213,8 @@ Content-Type: application/json
 ```json
 {
   "message": "login successful",
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJwdXJwb3NlIjoiIiwiZXhwIjoxNzU2NTkyNDcyLCJpYXQiOjE3NTY1OTEwMzJ9.lcFEKUoGCPXrphagGFpmg4Zth_3ad62GfzNj0MgIeX4"
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJwdXJwb3NlIjoiIiwiZXhwIjoxNzU2NjA0NDU0LCJpYXQiOjE3NTY1OTM2NTR9.VoeoJeZ93vgDb0Ssj7urHCOTWMOZRJcuQp16WlvdCDs",
+  "user_id": 1
 }
 ```
 
@@ -227,7 +228,7 @@ Content-Type: application/json
 #### Request
 
 ```http
-GET /api/v1/users/12
+GET /api/v1/users/1
 ```
 
 #### Response
@@ -235,10 +236,10 @@ GET /api/v1/users/12
 ```json
 {
   "user": {
-    "id": 12,
-    "email": "awwalEUR@gmail.com",
-    "phone": "+237670045009",
-    "created_at": "2025-08-28T10:00:00Z"
+    "id": 1,
+    "email": "awwalcodestar@nigeria.com",
+    "phone": "+23470985847",
+    "created_at": "2025-08-30T20:15:27.376762Z"
   }
 }
 ```
@@ -246,32 +247,6 @@ GET /api/v1/users/12
 ✅ User details retrieved
 
 </details>
-
-<details>
-<summary>✅ GET /api/v1/users/email/:email</summary>
-
-#### Request
-
-```http
-GET /api/v1/users/email/awwalEUR@gmail.com
-```
-
-#### Response
-
-```json
-{
-  "user": {
-    "id": 12,
-    "email": "awwalEUR@gmail.com",
-    "phone": "+237670045009"
-  }
-}
-```
-
-✅ User retrieved by email
-
-</details>
-
 </details>
 
 <details>
@@ -314,7 +289,7 @@ Content-Type: application/json
 #### Request
 
 ```http
-GET /api/v1/wallet/13
+GET /api/v1/wallet/1
 ```
 
 #### Response

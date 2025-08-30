@@ -1,6 +1,9 @@
 package pkg
 
-import "strings"
+import (
+	"reflect"
+	"strings"
+)
 
 type UserAgentInfo struct {
 	Browser string
@@ -42,4 +45,8 @@ func getName(ua string,abbr, name []string) string {
 		}
 	}
 	return ""
+}
+
+func IsNotEmpty(v interface{}) bool {
+    return !reflect.DeepEqual(v, reflect.Zero(reflect.TypeOf(v)).Interface())
 }

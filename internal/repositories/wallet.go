@@ -57,11 +57,11 @@ func (r *WalletRepository) CreateWalletWithBalanceTx(userId uint, label string) 
 	return &wallet, nil
 }
 
-func (r *WalletRepository) GetWalletByUserID(userID uint) (*models.Wallet, error) {
-	wallet := models.Wallet{}
-	err := r.DB.Preload("Balances").First(&wallet, "user_id = ?", userID).Error
+func (r *WalletRepository) GetWalletByUserID(userID uint) ([]models.Wallet, error) {
+	wallets := []models.Wallet{}
+	err := r.DB.Preload("Balances").Where("user_id = ?", userID).Find(&wallets).Error
 	if err != nil {
 		return nil, err
 	}
-	return &wallet, nil
+	return wallets, nil
 }

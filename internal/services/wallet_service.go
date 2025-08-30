@@ -43,6 +43,6 @@ func (s *WalletService) CreateWalletWithBalances(email, label string) (*models.W
 }
 
 // GetWalletByUserID retrieves wallet via repository
-func (s *WalletService) GetWalletByUserID(userID uint) (*models.Wallet, error) {
+func (s *WalletService) GetWalletByUserID(userID uint) ([]models.Wallet, error) {
 	return s.WalletRepo.GetWalletByUserID(userID)
 }
