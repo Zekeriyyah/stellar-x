@@ -5,7 +5,6 @@ import (
 	"log"
 	"os"
 
-	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -17,11 +16,6 @@ func InitDB() *gorm.DB {
 	// either using postgres on render or from docker
 	if os.Getenv("RENDER") == "true" {
 		
-		err := godotenv.Load()
-		if err != nil {
-			log.Fatal("failed to load .env file")
-		}
-
 		dsn = fmt.Sprintf(
 		"host=%s user=%s password=%s dbname=%s port=%s sslmode=%s",
 		os.Getenv("DB_HOST"),
