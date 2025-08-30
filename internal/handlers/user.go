@@ -65,7 +65,7 @@ func(u *UserHandler) Login(c *gin.Context) {
 
 	var input struct {
 		Email    string `json:"email"`
-		Password string `json:"-"`
+		Password string `json:"password"`
 	}
 
 	if err := c.ShouldBindJSON(&input); err != nil {
