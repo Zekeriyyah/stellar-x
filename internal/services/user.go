@@ -24,12 +24,12 @@ func NewUserService(repo *repositories.UserRepository) *UserService {
 
 func(s *UserService) CreateUser(user *models.User) (int, string) {
 
-	// // hash password before save
-	// if err := user.SetPassword(user.Password); err != nil {
-	// 	return http.StatusInternalServerError, "failed to hash password"
-	// }
-
-	// save user to database
+	// hash password before save
+	if err := user.SetPassword(user.Password); err != nil {
+		return http.StatusInternalServerError, "failed to hash password"
+	}
+	
+	// confirm database is active
 	if database.DB == nil {
 		return http.StatusInternalServerError, "database connection is not initialized"
 	}

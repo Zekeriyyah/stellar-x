@@ -18,7 +18,7 @@ func NewUserHandler(userService *services.UserService) *UserHandler {
 }
 
 type Input struct {
-		Email string `json:"password"`
+		Email string `json:"email"`
 		Phone string `json:"phone"`
 		Password string `json:"password"`
 }
