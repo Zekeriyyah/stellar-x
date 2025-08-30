@@ -17,18 +17,29 @@ func NewUserHandler(userService *services.UserService) *UserHandler {
 	return &UserHandler{UserService: userService}
 }
 
+type Input struct {
+		Email string `json:"password"`
+		Phone string `json:"phone"`
+		Password string `json:"password"`
+}
+
 // Signup handles POST /api/v1/user
 func(u *UserHandler) Signup(c *gin.Context) {
 
-	user := &models.User{}
+	input := &Input{};	
 
 	// bind JSON request to user struct
-	if err := c.ShouldBindJSON(user); err != nil {
+	if err := c.ShouldBindJSON(input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err})
 		return
 	}
 
-	status, msg := u.UserService.CreateUser(user)
+	user := models.User{
+		Email: input.Email,
+		Phone: input.Phone,
+		Password: input.Password,
+	}
+	status, msg := u.UserService.CreateUser(&user)
 	if status != http.StatusOK {
 		c.JSON(status, gin.H{"error": msg})
 		return
