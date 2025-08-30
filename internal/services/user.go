@@ -57,7 +57,7 @@ func (s *UserService) Login(email, password string) (string, int, string) {
 		return "", http.StatusUnauthorized, "password verification failed"
 	}
 
-	tokenStr, err := pkg.GeneratJWT(user.ID, time.Now().Add(24*time.Minute))
+	tokenStr, err := pkg.GeneratJWT(user.ID, time.Now().Add(3*time.Hour))
 	if err != nil {
 		return "", http.StatusInternalServerError, "invalid input"
 	}
