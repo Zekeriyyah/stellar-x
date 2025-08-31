@@ -9,11 +9,11 @@ Simulates real-time FX swaps, multi-currency wallets, and instant transfers acro
 
 ## 🛠️ Tech Stack
 
-- **Backend**: Go (Gin)
+- **Backend**: Go (Gin, GORM)
 - **Frontend**: React (coming soon)
 - **Database**: PostgreSQL
 - **Web Server**: nginx + Let’s Encrypt (HTTPS)
-- **Deployment**: Ubuntu 22.04 LTS
+- **Deployment**: Render, Ubuntu 22.04 LTS(soon)
 - **Infrastructure**: Docker Compose
 
 ---
@@ -25,8 +25,8 @@ Follow these steps to run **StellarX** on your machine.
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/stellarx.git
-cd stellarx
+git clone https://github.com/zekeriyyah/stellar-x.git
+cd stellar-x
 ```
 
 ### 2. Set Environment Variables
@@ -34,8 +34,6 @@ cd stellarx
 ```bash
 cp .env.example .env
 ```
-
-> ✅ No changes needed for default setup
 
 ### 3. Install Dependencies
 
@@ -57,14 +55,14 @@ docker compose ps
 ### 5. Test the API
 
 ```bash
-curl http://localhost/api/v1/ping
+curl http://localhost:port/api/v1/ping
 ```
 
 ✅ Expected: `{"message":"pong"}`
 
 ### 6. Access Services
 
-- **App API**: `http://localhost/api/v1/ping`
+- **App API**: `http://localhost:port/api/v1/ping`
 - **pgAdmin**: `http://localhost:5050` (admin@stellar.com / admin123)
 
 ### 7. Stop Services
@@ -100,14 +98,7 @@ stellarx/
 
 ### 🧪 Testing with Insomnia
 
-Import the Insomnia collection:
-
-1. Open [Insomnia](https://insomnia.rest/download)
-2. Go to `File → Import`
-3. Select `StellarX_Sandbox.yaml`
-4. Run requests in order: `Health Check → Wallet → Deposit → Swap → Transfer`
-
----
+## Run live test with [postman](https://documenter.getpostman.com/view/29195129/2sB3HhsMoi)
 
 ### 🐳 Docker Compose Services
 
@@ -517,7 +508,47 @@ GET /api/v1/transaction/14
 <summary>📁 7. Compliance Mode</summary>
 
 <details>
-<summary>✅ GET /api/v1/audit/:userId (Coming Soon)</summary>
+#### Request
+
+```http
+GET /api/v1/transaction/14
+```
+
+<details>
+<summary>✅ GET /api/v1/audit/:userId </summary>
+
+#### Response
+
+```json
+{
+  "transactions": [
+    {
+      "id": 4,
+      "tx_type": "transfer",
+      "sender_wallet_id": 1,
+      "receiver_wallet_id": 2,
+      "from_currency": "USDx",
+      "to_currency": "EURx",
+      "amount": 500,
+      "converted_amount": 428.89,
+      "fx_rate": 0.85778,
+      "status": "success",
+      "created_at": "2025-08-31T09:53:28.713863Z"
+    },
+    {
+      "id": 3,
+      "tx_type": "swap",
+      "sender_wallet_id": 1,
+      "receiver_wallet_id": null,
+      "from_currency": "USDx",
+      "to_currency": "cNGN",
+      "amount": 3000,
+      "converted_amount": 4595923.984740929,
+      "fx_rate": 1531.9746615803094,
+      "status": "success",
+      "created_at": "2025-08-31T09:21:20.928556Z"
+    }, ...
+```
 
 > ✅ Audit logging middleware is implemented and ready to capture:
 >
@@ -525,8 +556,6 @@ GET /api/v1/transaction/14
 > - Device
 > - Browser
 > - Country
->
-> Will be activated in production deployment.
 
 </details>
 
@@ -563,13 +592,13 @@ GET /api/v1/ask?q=what+is+the+latest+most+stable+coin
 
 ## 🌐 Deployed Link
 
-[https://stellarx.example.com](https://stellarx.example.com)
+[https://stellar-x.onrender.com](https://stellar-x.onrender.com)
 
 ---
 
 ## 📚 API Documentation
 
-## View interactive API docs:
+## View interactive API docs: [Postman Doc](https://documenter.getpostman.com/view/29195129/2sB3HhsMoi)
 
 ## 🗺️ Entity Relationship Diagram (ERD)
 
