@@ -1,0 +1,166 @@
+/* styles.css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+  color: #1e293b;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.container {
+  max-width: 800px;
+  width: 100%;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e2e8f0;
+}
+
+header h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.5rem;
+}
+
+.tagline {
+  font-size: 1.2rem;
+  color: #64748b;
+  margin-bottom: 1.5rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.status .badge {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.status .live {
+  background: #16a34a;
+  color: white;
+}
+
+.status p {
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+.features h2 {
+  font-size: 1.8rem;
+  margin: 2.5rem 0 1.5rem;
+  color: #0f172a;
+}
+
+.features ul {
+  text-align: left;
+  display: inline-block;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  line-height: 2;
+  color: #334155;
+}
+
+.features li {
+  margin: 0.5rem 0;
+}
+
+.cta {
+  margin: 2.5rem 0;
+}
+
+.cta p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  color: #0f172a;
+}
+
+.links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.btn.api {
+  background: #10b981;
+  color: white;
+}
+
+.btn.api:hover {
+  background: #0d9488;
+  transform: translateY(-2px);
+}
+
+.btn.github {
+  background: #475569;
+  color: white;
+}
+
+.btn.github:hover {
+  background: #64748b;
+  transform: translateY(-2px);
+}
+
+.btn.docs {
+  background: #3b82f6;
+  color: white;
+}
+
+.btn.docs:hover {
+  background: #2563eb;
+  transform: translateY(-2px);
+}
+
+footer {
+  margin-top: 2.5rem;
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .container {
+    padding: 1.5rem;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+  }
+
+  .links {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn {
+    width: 100%;
+    max-width: 300px;
+  }
+}
