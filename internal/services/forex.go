@@ -93,7 +93,7 @@ func (s *FXService) getCoinGeckoRate(from, to string) (float64, error) {
 		return 0, err
 	}
 
-	var cgResp CoinGeckoResponse
+	cgResp := CoinGeckoResponse{}
 	if err := json.Unmarshal(body, &cgResp); err != nil {
 		return 0, err
 	}
@@ -101,7 +101,7 @@ func (s *FXService) getCoinGeckoRate(from, to string) (float64, error) {
 	// Get values
 	fromVal, fromExists := cgResp.Rates[from]
 	toVal, toExists := cgResp.Rates[to]
-
+	log.Println(fromVal, toVal)
 	if !fromExists {
 		return 0, fmt.Errorf("currency not found: %s", from)
 	}
