@@ -5,35 +5,35 @@ import (
 )
 
 // MapStableCoinToISO converts stablecoin to fiat ISO code
-func MapStablecoinToISO(currency string) string {
-	switch currency {
-	case "cNGN", "cngn": return "ngn"
-	case "cXAF", "cxaf": return "xaf"
-	case "USDx", "usdx": return "usd"
-	case "EURx", "eurx": return "eur"
-	case "cZAR", "czar": return "zar"
-	case "cGHS", "cghs": return "ghs"
-	case "cKES", "kes": return "kes"
-	default: return currency
-	}
-}
-
-// var currency = []string{"ngn", "usd", "eur", "xaf"}
-
-// func MapStablecoinToISO(coin string) string {
-// 	coinLower := strings.ToLower(coin)
-
-// 	if len(coinLower) <= 3 {
-// 		return coinLower
+// func MapStablecoinToISO(currency string) string {
+// 	switch currency {
+// 	case "cNGN", "cngn": return "ngn"
+// 	case "cXAF", "cxaf": return "xaf"
+// 	case "USDx", "usdx": return "usd"
+// 	case "EURx", "eurx": return "eur"
+// 	case "cZAR", "czar": return "zar"
+// 	case "cGHS", "cghs": return "ghs"
+// 	case "cKES", "kes": return "kes"
+// 	default: return currency
 // 	}
-
-// 	for i:=0; i < 4; i++{
-// 		if strings.Contains(coinLower,currency[i]) {
-// 			return currency[i]
-// 		}
-// 	}
-// 	return coinLower
 // }
+
+var currency = []string{"ngn", "usd", "eur", "xaf"}
+
+func MapStablecoinToISO(coin string) string {
+	coinLower := strings.ToLower(coin)
+
+	if len(coinLower) <= 3 {
+		return coinLower
+	}
+
+	for i:=0; i < 4; i++{
+		if strings.Contains(coinLower,currency[i]) {
+			return currency[i]
+		}
+	}
+	return coinLower
+}
 
 
 // IsAfricanCurrency checks if currency is African
