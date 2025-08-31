@@ -100,6 +100,7 @@ func (s *FXService) getCoinGeckoRate(from, to string) (float64, error) {
 	}
 
 	// Get values
+	log.Println(cgResp)
 	fromVal, fromExists := cgResp.Rates[from]
 	toVal, toExists := cgResp.Rates[to]
 	log.Println(fromVal, toVal)
