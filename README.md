@@ -96,7 +96,7 @@ stellarx/
 
 ---
 
-### 🧪 Testing with Insomnia
+### 🧪 Testing with Postman
 
 ## Run live test with [postman](https://documenter.getpostman.com/view/29195129/2sB3HhsMoi)
 
