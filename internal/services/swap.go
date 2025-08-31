@@ -2,6 +2,7 @@ package services
 
 import (
 	"errors"
+	"fmt"
 	"time"
 
 	"github.com/Zekeriyyah/stellar-x/internal/models"
@@ -47,7 +48,7 @@ func (s *SwapService) Swap(walletID uint, fromCurrency, toCurrency string,	amoun
 	// Get FX rate
 	rate, err := s.FXService.GetRate(fromCurrency, toCurrency)
 	if err != nil {
-		return nil, errors.New("failed to get FX rate")
+		return nil, errors.New(fmt.Sprintf("failed to get FX rate: ", err))
 	}
 
 	// Calculate converted amount
