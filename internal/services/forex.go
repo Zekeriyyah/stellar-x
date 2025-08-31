@@ -68,12 +68,12 @@ func (s *FXService) getFrankfurterRate(from, to string) (float64, error) {
 		return 0, err
 	}
 
-	var fxResp FrankfurterResponse
+	fxResp := FrankfurterResponse{}
 	if err := json.Unmarshal(body, &fxResp); err != nil {
 		return 0, err
 	}
 
-	log.Println(fxResp)
+	log.Println("fxRep: ", fxResp)
 
 	if rate, exists := fxResp.Rates[to]; exists {
 		return rate, nil
