@@ -15,10 +15,9 @@ func SetupRouter(r *gin.Engine) *gin.Engine {
 	
 	// Landing page
 	r.GET("/", func(c *gin.Context) {
-    c.File("/scripts/index.html")
+    c.File("index.html")
 	})
 	r.StaticFile("/styles.css", "/scripts/styles.css")
-	r.StaticFile("/favicon.ico", "/scripts/favicon.ico")
 
 	// Health check
 	r.GET("/ping", func(c *gin.Context) {
