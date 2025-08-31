@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/Zekeriyyah/stellar-x/internal/models"
@@ -44,14 +45,16 @@ func (d *DepositHandler) Handle(c *gin.Context) {
 		return
 	}
 
-	requiredWallet := models.Wallet{}
-	for i := 0; i < len(wallets); i++ {
-		if input.WalletId == wallets[i].ID {
-			requiredWallet = wallets[i]
-			return
+	var requiredWallet models.Wallet
+	
+	for _, wallet := range wallets {
+		if wallet.ID == input.WalletId {
+			requiredWallet = wallet
 		}
 	}
-
+	
+	log.Print("RequiredWallet:\n", requiredWallet)
+	
 	if !pkg.IsNotEmpty(requiredWallet) {
 		c.JSON(http.StatusNotFound, "user has no wallet of this id")
 		return
