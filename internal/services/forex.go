@@ -41,7 +41,8 @@ func (s *FXService) GetRate(from, to string) (float64, error) {
 	if fiatFrom == fiatTo {
 		return 1.0, nil
 	}
-
+	log.Println(fiatFrom, fiatTo)
+	
 	// Prefer CoinGecko for African currencies
 	if pkg.IsAfricanCurrency(fiatFrom) || pkg.IsAfricanCurrency(fiatTo) {
 		return s.getCoinGeckoRate(fiatFrom, fiatTo)

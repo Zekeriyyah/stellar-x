@@ -88,6 +88,7 @@ stellarx/
 │   ├── services/          # Business logic
 │   ├── handlers/          # HTTP layer
 │   └── database/          # DB connection
+|   └── routes/            # Routes setup
 ├── config/
 │   └── nginx.conf         # Reverse proxy config
 ├── docker-compose.yml     # Services orchestration
@@ -157,7 +158,7 @@ GET /ping
 <summary>📁 1. Users Endpoints</summary>
 
 <details>
-<summary>✅ POST /api/v1/users</summary>
+<summary>✅ POST /api/signup</summary>
 
 #### Request
 
