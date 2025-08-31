@@ -586,7 +586,7 @@ GET /api/v1/ask?q=what+is+the+latest+most+stable+coin
 
 </details>
 </details>
-
+---
 ---
 
 ## 🌐 Deployed Link
