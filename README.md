@@ -82,7 +82,7 @@ stellarx/
 │       └── main.go        # Entry point
 ├── internal/
 │   ├── models/            # Database models
-│   ├── repository/        # DB access
+│   ├── repositories/        # DB access
 │   ├── services/          # Business logic
 │   ├── handlers/          # HTTP layer
 │   └── database/          # DB connection
@@ -182,10 +182,11 @@ Content-Type: application/json
 ✅ User created for wallet association
 
 </details>
+</details>
 
 <details>
 <summary>✅ GET /api/login</summary>
-
+<details>
 #### Request
 
 ```http
@@ -213,10 +214,11 @@ Content-Type: application/json
 ✅ User logged in.
 
 </details>
+</details>
 
 <details>
 <summary>✅ GET /api/v1/users/:userId</summary>
-
+<details>
 #### Request
 
 ```http
@@ -274,10 +276,11 @@ Content-Type: application/json
 ✅ Wallet initialized with zero balances for `cNGN`, `cXAF`, `USDx`, `EURx`
 
 </details>
+</details>
 
 <details>
 <summary>✅ GET /api/v1/wallet/:userId</summary>
-
+<details>
 #### Request
 
 ```http
@@ -374,7 +377,7 @@ Content-Type: application/json
 
 <details>
 <summary>✅ POST /api/v1/swap</summary>
-
+<details>
 #### Request
 
 ```http
@@ -459,7 +462,6 @@ Content-Type: application/json
 ✅ Auto-converted using FX rate; atomic transaction
 
 </details>
-
 </details>
 
 <details>
@@ -501,7 +503,6 @@ GET /api/v1/transaction/14
 ✅ Chronological order; includes FX rates
 
 </details>
-
 </details>
 
 <details>
@@ -591,7 +592,7 @@ GET /api/v1/ask?q=what+is+the+latest+most+stable+coin
 
 ## 🌐 Deployed Link
 
-[https://stellar-x.onrender.com](https://stellar-x.onrender.com)
+[https://stellar-x.onrender.com](https://stellar-x.onrender.com/)
 
 ---
 
