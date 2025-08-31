@@ -6,7 +6,6 @@ import (
 	"io"
 	"log"
 	"net/http"
-	"os"
 	"strings"
 
 	"github.com/Zekeriyyah/stellar-x/pkg"
@@ -58,7 +57,7 @@ func (s *FXService) GetRate(from, to string) (float64, error) {
 
 // getFrankfurterRate fetches rate from api.frankfurter.dev
 func (s *FXService) getFrankfurterRate(from, to string) (float64, error) {
-	url := fmt.Sprintf(os.Getenv("FRANKFURTER_API_URL"), from, to)
+	url := fmt.Sprintf("https://api.frankfurter.dev/v1/latest?base=%s&symbols=%s", from, to)
 	resp, err := http.Get(url)
 	if err != nil {
 		return 0, err
@@ -83,7 +82,7 @@ func (s *FXService) getFrankfurterRate(from, to string) (float64, error) {
 
 // getCoinGeckoRate fetches rate from CoinGecko
 func (s *FXService) getCoinGeckoRate(from, to string) (float64, error) {
-	url := os.Getenv("COINGECKO_API_URL")
+	url := "https://api.coingecko.com/api/v3/exchange_rates"
 	resp, err := http.Get(url)
 	if err != nil {
 		return 0, err
