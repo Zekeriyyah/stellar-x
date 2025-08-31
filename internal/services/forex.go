@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"log"
+
 	"net/http"
 	"strings"
 
@@ -42,15 +43,12 @@ func (s *FXService) GetRate(from, to string) (float64, error) {
 	if fiatFrom == fiatTo {
 		return 1.0, nil
 	}
-	log.Println(fiatFrom, fiatTo)
 
 	// Prefer CoinGecko for African currencies
 	if pkg.IsAfricanCurrency(fiatFrom) || pkg.IsAfricanCurrency(fiatTo) {
-		log.Println("Currently in coin gecko")
 		return s.getCoinGeckoRate(fiatFrom, fiatTo)
 	}
 
-	log.Println("about entering frankfurter")
 	// Use Frankfurter for global fiat pairs
 	return s.getFrankfurterRate(fiatFrom, fiatTo)
 }
@@ -98,12 +96,10 @@ func (s *FXService) getCoinGeckoRate(from, to string) (float64, error) {
 
 	cgResp := CoinGeckoResponse{}
 	if err := json.Unmarshal(body, &cgResp); err != nil {
-		log.Println(cgResp, "failed to unmarshal")
 		return 0, err
 	}
 
 	// Get values
-	log.Println(cgResp)
 	fromVal, fromExists := cgResp.Rates[from]
 	toVal, toExists := cgResp.Rates[to]
 	log.Println(fromVal, toVal)
@@ -114,7 +110,6 @@ func (s *FXService) getCoinGeckoRate(from, to string) (float64, error) {
 		return 0, fmt.Errorf("currency not found: %s", to)
 	}
 
-	log.Print(fromVal.Value, toVal.Value)
 	// Convert: (to / USD) / (from / USD) = from/to
 	rate := toVal.Value / fromVal.Value
 	return rate, nil
