@@ -73,10 +73,12 @@ func (s *FXService) getFrankfurterRate(from, to string) (float64, error) {
 		return 0, err
 	}
 
+	log.Println(fxResp)
+
 	if rate, exists := fxResp.Rates[to]; exists {
 		return rate, nil
 	}
-	return 0, fmt.Errorf("rate not found: %s/%s", from, to)
+	return 0, fmt.Errorf("rate not found for: %s/%s", from, to)
 }
 
 // getCoinGeckoRate fetches rate from CoinGecko
