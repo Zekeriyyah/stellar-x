@@ -6,7 +6,6 @@ import (
 	"io"
 	"log"
 	"net/http"
-	"strings"
 
 	"github.com/Zekeriyyah/stellar-x/pkg"
 )
@@ -38,9 +37,6 @@ func (s *FXService) GetRate(from, to string) (float64, error) {
 	// Map stablecoins to fiat
 	fiatFrom := pkg.MapStablecoinToISO(from)
 	fiatTo := pkg.MapStablecoinToISO(to)
-
-	fiatFrom = strings.ToLower(fiatFrom)
-	fiatTo = strings.ToLower(fiatTo)
 
 	if fiatFrom == fiatTo {
 		return 1.0, nil
