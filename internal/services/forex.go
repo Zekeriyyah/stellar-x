@@ -95,6 +95,7 @@ func (s *FXService) getCoinGeckoRate(from, to string) (float64, error) {
 
 	cgResp := CoinGeckoResponse{}
 	if err := json.Unmarshal(body, &cgResp); err != nil {
+		log.Println(cgResp)
 		return 0, err
 	}
 
