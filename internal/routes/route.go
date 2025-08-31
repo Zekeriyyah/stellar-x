@@ -13,12 +13,6 @@ import (
 func SetupRouter(r *gin.Engine) *gin.Engine {
 		
 	
-	// Landing page
-	r.GET("/", func(c *gin.Context) {
-    c.File("index.html")
-	})
-	r.StaticFile("/styles.css", "/scripts/styles.css")
-
 	// Health check
 	r.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{"message": "pong"})

@@ -25,8 +25,13 @@ func main() {
 			return
 		}
 	}
-	
 	r := gin.Default()
+
+	// Landing page
+	r.GET("/", func(c *gin.Context) {
+    c.File("index.html")
+	})
+	r.StaticFile("/styles.css", "/scripts/styles.css")
 
 	// Setup all other routes 
 	r = routes.SetupRouter(r) 
