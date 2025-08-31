@@ -55,7 +55,7 @@ func SetupRouter(r *gin.Engine) *gin.Engine {
 
 
 	r.POST("/api/signup", userHandler.Signup)
-	r.GET("/api/login", userHandler.Login)
+	r.POST("/api/login", userHandler.Login)
 
 	api := r.Group("/api/v1")
 
