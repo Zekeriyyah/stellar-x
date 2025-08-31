@@ -95,7 +95,7 @@ func (s *FXService) getCoinGeckoRate(from, to string) (float64, error) {
 
 	cgResp := CoinGeckoResponse{}
 	if err := json.Unmarshal(body, &cgResp); err != nil {
-		log.Println(cgResp)
+		log.Println(cgResp, "failed to unmarshal")
 		return 0, err
 	}
 
