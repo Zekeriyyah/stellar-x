@@ -295,20 +295,46 @@ GET /api/v1/wallet/1
 #### Response
 
 ```json
-{
-  "wallet": {
-    "id": 13,
-    "user_id": 13,
-    "label": "Nigeria Wallet",
-    "balances": [
-      { "currency": "cNGN", "amount": 10000 },
-      { "currency": "USDx", "amount": 6.67 }
-    ]
-  }
-}
+ "body": [
+        {
+            "id": 1,
+            "user_id": 1,
+            "label": "Typical Nigerian Wallet",
+            "created_at": "2025-08-30T20:29:17.274441Z",
+            "updated_at": "2025-08-30T20:29:17.274441Z",
+            "balances": [
+                {
+                    "id": 1,
+                    "wallet_id": 1,
+                    "currency": "cNGN",
+                    "amount": 0,
+                    "created_at": "2025-08-30T20:29:17.329304Z",
+                    "updated_at": "2025-08-30T20:29:17.329304Z"
+                },
+                {
+                    "id": 2,
+                    "wallet_id": 1,
+                    "currency": "cXAF",
+                    "amount": 0,
+                    "created_at": "2025-08-30T20:29:17.329304Z",
+                    "updated_at": "2025-08-30T20:29:17.329304Z"
+                },
+                {
+                    "id": 3,
+                    "wallet_id": 1,
+                    "currency": "USDx",
+                    "amount": 0,
+                    "created_at": "2025-08-30T20:29:17.329304Z",
+                    "updated_at": "2025-08-30T20:29:17.329304Z"
+                },
+                {
+                    "id": 4,
+                    "wallet_id": 1,
+                    "currency":
+                    ...
 ```
 
-✅ Confirms wallet and balances
+✅ Confirms wallets and balances for a user
 
 </details>
 

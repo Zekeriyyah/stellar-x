@@ -64,8 +64,5 @@ func (d *DepositHandler) Handle(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{
-		"message": "deposit successful",
-		"body": gin.H{"transaction-details": transaction},
-	})
+	c.JSON(http.StatusOK, gin.H{"message": "deposit successful","transaction-details": transaction})
 }
