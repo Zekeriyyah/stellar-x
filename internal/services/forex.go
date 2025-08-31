@@ -6,6 +6,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"strings"
 
 	"github.com/Zekeriyyah/stellar-x/pkg"
 )
@@ -74,8 +75,8 @@ func (s *FXService) getFrankfurterRate(from, to string) (float64, error) {
 	}
 
 	log.Println("fxRep: ", fxResp)
-
-	if rate, exists := fxResp.Rates[to]; exists {
+	
+	if rate, exists := fxResp.Rates[strings.ToUpper(to)]; exists {
 		return rate, nil
 	}
 	return 0, fmt.Errorf("rate not found for: %s/%s", from, to)
