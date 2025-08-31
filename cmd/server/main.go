@@ -31,7 +31,7 @@ func main() {
 	r.GET("/", func(c *gin.Context) {
     c.File("index.html")
 	})
-	r.StaticFile("/styles.css", "/scripts/styles.css")
+	r.StaticFile("/styles.css", "styles.css")
 
 	// Setup all other routes 
 	r = routes.SetupRouter(r) 
