@@ -42,12 +42,14 @@ func (s *FXService) GetRate(from, to string) (float64, error) {
 		return 1.0, nil
 	}
 	log.Println(fiatFrom, fiatTo)
-	
+
 	// Prefer CoinGecko for African currencies
 	if pkg.IsAfricanCurrency(fiatFrom) || pkg.IsAfricanCurrency(fiatTo) {
+		log.Println("Currently in coin gecko")
 		return s.getCoinGeckoRate(fiatFrom, fiatTo)
 	}
 
+	log.Println("about entering frankfurter")
 	// Use Frankfurter for global fiat pairs
 	return s.getFrankfurterRate(fiatFrom, fiatTo)
 }
