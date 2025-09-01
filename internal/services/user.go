@@ -50,7 +50,7 @@ func (s *UserService) Login(email, password string) (string, uint, int, string) 
 
 	user, err :=s.userRepo.FindUserByEmail(email) 
 	if err != nil {
-		return "",0, http.StatusNotFound, "user not found"
+		return "",0, http.StatusUnauthorized, "user not found"
 	}
 
 	if !user.VerifyPassword(password) {
