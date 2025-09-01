@@ -2,9 +2,11 @@ package main
 
 import (
 	"os"
+	"time"
 
 	"github.com/Zekeriyyah/stellar-x/internal/database"
 	"github.com/Zekeriyyah/stellar-x/internal/routes"
+	"github.com/gin-contrib/cors"
 
 	"github.com/Zekeriyyah/stellar-x/pkg"
 	"github.com/gin-gonic/gin"
@@ -25,6 +27,17 @@ func main() {
 			return
 		}
 	}
+
+	// Configure CORS
+	r.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"http://localhost:5173", "https://stellar-x-ui.vercel.app"},
+		AllowMethods:     []string{"GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization", "Accept"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+		MaxAge:           24 * time.Hour,
+	}))
+
 	r := gin.Default()
 
 	// Landing page
