@@ -28,6 +28,8 @@ func main() {
 		}
 	}
 
+	r := gin.Default()
+
 	// Configure CORS
 	r.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"http://localhost:5173", "https://stellar-x-ui.vercel.app"},
@@ -38,7 +40,6 @@ func main() {
 		MaxAge:           24 * time.Hour,
 	}))
 
-	r := gin.Default()
 
 	// Landing page
 	r.GET("/", func(c *gin.Context) {
