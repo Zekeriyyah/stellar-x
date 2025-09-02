@@ -51,7 +51,7 @@ func (s *UserService) Login(email, password string) (string, uint, int, string) 
 
 	user, err :=s.userRepo.FindUserByEmail(email) 
 	if err != nil {
-		return "",0, http.StatusUnauthorized, "user not found"
+		return "",0, http.StatusUnauthorized, fmt.Sprintf("user not found: %v", err)
 	}
 
 	if !user.VerifyPassword(password) {
@@ -60,7 +60,7 @@ func (s *UserService) Login(email, password string) (string, uint, int, string) 
 
 	tokenStr, err := pkg.GeneratJWT(user.ID, time.Now().Add(3*time.Hour))
 	if err != nil {
-		return "",0, http.StatusInternalServerError, "invalid input"
+		return "",0, http.StatusInternalServerError, fmt.Sprintf("invalid input: %v",err)
 	}
 
 	return tokenStr, user.ID, 200, "login successful"
@@ -71,10 +71,10 @@ func(u *UserService) GetUserByID(id uint) (*models.User, int, string) {
 	user, err := u.userRepo.FindUserByID(id)
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return nil, http.StatusNotFound, "user not found"
+			return nil, http.StatusUnauthorized, fmt.Sprintf("wrong input: %v", err)
 		}
 
-		return nil, http.StatusInternalServerError, "failed to fetch user"
+		return nil, http.StatusInternalServerError, fmt.Sprintf("failed to fetch user: %v", err)
 
 	}
 	return user, 200, "success"
@@ -84,10 +84,10 @@ func(u *UserService) GetUserByEmail(email string) (*models.User, int, string) {
 	user, err := u.userRepo.FindUserByEmail(email)
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return nil, http.StatusNotFound, "user not found"
+			return nil, http.StatusUnauthorized, fmt.Sprintf("wrong input: %v", err)
 		}
 
-		return nil, http.StatusInternalServerError, "failed to fetch user"
+		return nil, http.StatusInternalServerError, fmt.Sprintf("failed to fetch user: %v",err)
 	}
 
 	return user, 200, "success"
