@@ -18,9 +18,7 @@ func SetupRouter(r *gin.Engine) *gin.Engine {
 		c.JSON(200, gin.H{"message": "pong"})
 	})
 
-	// Dummy route to fetch all currency
-	r.GET("/currency", handlers.GetAllFxResp)
-
+	
 	// Initialize repositories
 	userRepo := repositories.NewUserRepository(database.DB)
 	walletRepo := repositories.NewWalletRepository(database.DB)
@@ -57,6 +55,8 @@ func SetupRouter(r *gin.Engine) *gin.Engine {
 	
 	// API v1
 
+	// Dummy route to fetch all currency
+	r.GET("/api/currencies", handlers.GetAllFxResp)
 
 	r.POST("/api/signup", userHandler.Signup)
 	r.POST("/api/login", userHandler.Login)
