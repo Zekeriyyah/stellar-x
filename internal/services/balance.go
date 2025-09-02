@@ -2,6 +2,7 @@ package services
 
 import (
 	"errors"
+	"fmt"
 
 	"github.com/Zekeriyyah/stellar-x/internal/models"
 	"github.com/Zekeriyyah/stellar-x/internal/repositories"
@@ -42,7 +43,7 @@ func (s *BalanceService) Increase(walletID uint, currency string, amount float64
 
 	balance, err := s.GetBalance(walletID, currency)
 	if err != nil {
-		return errors.New("could not get balance for the wallet")
+		return fmt.Errorf("could not get balance for the wallet: %v", err.Error())
 	}
 
 	balance.Amount += amount
@@ -57,7 +58,7 @@ func (s *BalanceService) Decrease(walletID uint, currency string, amount float64
 
 	balance, err := s.GetBalance(walletID, currency)
 	if err != nil {
-		return errors.New("invalid currency or wallet id")
+		return fmt.Errorf("invalid currency or wallet id: %v", err.Error())
 	}
 
 	if balance.Amount < amount {
@@ -68,7 +69,7 @@ func (s *BalanceService) Decrease(walletID uint, currency string, amount float64
 
 	// ✅ Save updated balance to database
 	if err := s.BalanceRepo.Update(balance); err != nil {
-		return errors.New("failed to update balance")
+		return fmt.Errorf("failed to update balance: %v", err.Error())
 	}
 	return nil
 }

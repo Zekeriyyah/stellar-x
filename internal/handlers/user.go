@@ -87,7 +87,7 @@ func (h *UserHandler) GetByID(c *gin.Context) {
 	idStr := c.Param("userId")
 	id, err := strconv.ParseUint(idStr, 10, 64)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid user ID"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid user ID"})
 		return
 	}
 
@@ -104,7 +104,7 @@ func (h *UserHandler) GetByID(c *gin.Context) {
 func (h *UserHandler) GetByEmail(c *gin.Context) {
 	email := c.Param("email")
 	if email == "" {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Email is required"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "email is required"})
 		return
 	}
 

@@ -60,7 +60,7 @@ func (s *UserService) Login(email, password string) (string, uint, int, string) 
 
 	tokenStr, err := pkg.GeneratJWT(user.ID, time.Now().Add(3*time.Hour))
 	if err != nil {
-		return "",0, http.StatusInternalServerError, fmt.Sprintf("invalid input: %v",err)
+		return "",0, http.StatusUnauthorized, fmt.Sprintf("invalid input: %v",err)
 	}
 
 	return tokenStr, user.ID, 200, "login successful"

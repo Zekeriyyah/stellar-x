@@ -22,13 +22,13 @@ func (h *TransactionHandler) GetHistory(c *gin.Context) {
 
 	userID, err := strconv.ParseUint(userIDStr, 10, 64)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid user id"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid user id"+ err.Error()})
 		return
 	}
 
 	transactions, err := h.TransactionService.GetByUserID(uint(userID))
 	if err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": "no transactions found"})
+		c.JSON(http.StatusNotFound, gin.H{"error": "no transactions found: " + err.Error()})
 		return
 	}
 
@@ -57,7 +57,7 @@ func (h *TransactionHandler) GetRecent(c *gin.Context) {
 	// Get transactions
 	result, err := h.TransactionService.GetRecent(page, pageSize)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch transactions"})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to fetch transactions: " + err.Error()})
 		return
 	}
 

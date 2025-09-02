@@ -2,6 +2,7 @@ package services
 
 import (
 	"errors"
+	"fmt"
 	"time"
 
 	"github.com/Zekeriyyah/stellar-x/internal/models"
@@ -36,7 +37,7 @@ func (s *TransferService) Transfer(senderWalletID uint, receiverWalletID uint, f
 	// Check sender balance - wallet exist and enough money
 	senderBalance, err := s.BalanceService.GetBalance(senderWalletID, fromCurrency)
 	if err != nil {
-		return nil, errors.New("sender wallet not found")
+		return nil, fmt.Errorf("sender wallet not found: %v", err)
 	}
 	if senderBalance.Amount < amount {
 		return nil, errors.New("insufficient balance")
@@ -45,7 +46,7 @@ func (s *TransferService) Transfer(senderWalletID uint, receiverWalletID uint, f
 	// Check if reciever wallet exist
 	_, err = s.WalletRepo.GetWalletByUserID(receiverWalletID)
 	if err != nil {
-		return nil, errors.New("receiver wallet not found")
+		return nil, fmt.Errorf("receiver wallet not found: %v", err)
 	}
 
 	// Execute in transaction
@@ -73,7 +74,7 @@ func (s *TransferService) Transfer(senderWalletID uint, receiverWalletID uint, f
 			// Different currency → use FX rate
 			rate, err := s.FXService.GetRate(fromCurrency, toCurrency)
 			if err != nil {
-				return errors.New("failed to get FX rate")
+				return fmt.Errorf("failed to get FX rate: %v", err)
 			}
 
 			convertedAmount = amount * rate

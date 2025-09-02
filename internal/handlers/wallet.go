@@ -58,13 +58,13 @@ func(w *WalletHandler) GetWallet(c *gin.Context) {
 	userIdUint, err := strconv.ParseUint(userId, 10, 64)
 
 	if err !=nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid id"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid id - must be an unsigned integer"})
 		return
 	}
 
 	wallet, err := w.walletService.GetWalletByUserID(uint(userIdUint))
 	if err !=nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "wallet not found"})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return 
 	}
 

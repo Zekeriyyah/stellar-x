@@ -28,7 +28,7 @@ func (s *WalletService) CreateWalletWithBalances(email, label string) (*models.W
 	// Get user with the email
 	user, err:= s.UserRepo.FindUserByEmail(email)
 	if err != nil {
-		return &models.Wallet{}, fmt.Errorf("user not found %v", err)
+		return &models.Wallet{}, fmt.Errorf("wrong input: %v", err)
 	}
 	
 	wallet := &models.Wallet{

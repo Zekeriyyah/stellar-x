@@ -3,6 +3,7 @@ package services
 
 import (
 	"errors"
+	"fmt"
 	"time"
 
 	"github.com/Zekeriyyah/stellar-x/internal/models"
@@ -43,7 +44,7 @@ func (s *DepositService) Deposit(walletID uint, currency string, amount float64)
 	// Find Balance
 	balance, err := s.BalanceRepo.FindByWalletIDAndCurrency(walletID, currency)
 	if err != nil {
-		return nil, errors.New("balance not found")
+		return nil, fmt.Errorf("balance not found: %v", err.Error())
 	}
 
 	// update amount in balance
@@ -51,7 +52,7 @@ func (s *DepositService) Deposit(walletID uint, currency string, amount float64)
 	
 	// After updating balance
 	if err := s.BalanceRepo.Update(balance); err != nil {
-		return nil, errors.New("failed to update balance")
+		return nil, fmt.Errorf("failed to update balance: %v", err.Error())
 	}
 
 	// Create transaction

@@ -33,7 +33,7 @@ func (d *DepositHandler) Handle(c *gin.Context) {
 	input := &DepositInput{}
 	
 	if err := c.ShouldBindJSON(input); err !=nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "invaliid input"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "invaliid input: " + err.Error()})
 		return
 	}
 
@@ -41,7 +41,7 @@ func (d *DepositHandler) Handle(c *gin.Context) {
 	wallets, err := d.WalletService.GetWalletByUserID(input.UserId)
 
 	if err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"erro": "wallet with the user id not found"})
+		c.JSON(http.StatusNotFound, gin.H{"error": "wallet not found"+ err.Error()})
 		return
 	}
 

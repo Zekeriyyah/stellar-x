@@ -23,7 +23,7 @@ func (h *AuditLogHandler) GetAuditLogByUserID(c *gin.Context) {
 	// parse user id
 		userId, err := strconv.ParseUint(userID, 10, 64)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid user ID: must be a positive number"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid user ID: must be a positive number"})
 		return
 	}
 	userIdUint := uint(userId)

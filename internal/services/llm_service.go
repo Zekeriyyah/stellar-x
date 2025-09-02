@@ -3,6 +3,7 @@ package services
 import (
 	"context"
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/Zekeriyyah/stellar-x/pkg"
@@ -16,6 +17,7 @@ type AIService struct {
 
 func NewAIService(fxService *FXService) *AIService {
 	apiKey := os.Getenv("OPENAI_API_KEY")
+	log.Println(apiKey)
 	if apiKey == "" {
 		return nil
 	}
