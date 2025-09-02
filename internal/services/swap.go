@@ -86,7 +86,7 @@ func (s *SwapService) Swap(walletID uint, fromCurrency, toCurrency string,	amoun
 		Amount:          amount,
 		ConvertedAmount: convertedAmount,
 		FxRate:          rate,
-		Status: 		 "success",
+		Status: 		 "completed",
 		CreatedAt:       time.Now(),
 	}
 
