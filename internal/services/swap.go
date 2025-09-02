@@ -50,7 +50,25 @@ func (s *SwapService) Swap(walletID uint, fromCurrency, toCurrency string,	amoun
 	rate, err := s.FXService.GetRate(fromCurrency, toCurrency)
 	if err != nil {
 		log.Println("rate: ", rate)
-		return nil, fmt.Errorf("failed to get FX rate: %v", err)
+
+		//Save failed transaction
+		transaction := &models.Transaction{
+		TxType:          "swap",
+		SenderWalletID:  &walletID,
+		FromCurrency:    fromCurrency,
+		ToCurrency:      toCurrency,
+		Amount:          amount,
+		Status: 		 "failed",
+		CreatedAt:       time.Now(),
+		}
+
+		// Save transaction
+		if err := s.TransactionRepo.CreateTransaction(transaction); err != nil {
+			log.Println("failed transaction not created for swap")
+		}
+
+		return transaction, fmt.Errorf("currency not found: %v", err)
+
 	}
 
 	// Calculate converted amount
