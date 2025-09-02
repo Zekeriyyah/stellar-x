@@ -1,8 +1,27 @@
 package pkg
 
 import (
+	"encoding/json"
+	"io"
+	"net/http"
 	"strings"
 )
+
+// FXResponse for Frankfurter
+type FrankfurterResponse struct {
+	Base   string             `json:"base"`
+	Rates  map[string]float64 `json:"rates"`
+}
+
+// CoinGeckoResponse for fiat rates
+type CoinGeckoResponse struct {
+	Rates map[string]struct {
+		Name  string  `json:"name"`
+		Unit  string  `json:"unit"`
+		Value float64 `json:"value"`
+		Type  string  `json:"type"`
+	} `json:"rates"`
+}
 
 // MapStableCoinToISO converts stablecoin to fiat ISO code
 // func MapStablecoinToISO(currency string) string {
@@ -51,4 +70,47 @@ func ScrapeQuery(query string) []string {
 		}
 	}
 	return presentCurr
+}
+
+
+
+func GetAllFxCurrencies() (*CoinGeckoResponse, *FrankfurterResponse) {
+	url := "https://api.coingecko.com/api/v3/exchange_rates"
+	resp, err := http.Get(url)
+	if err != nil {
+		return &CoinGeckoResponse{}, &FrankfurterResponse{}
+	}
+	defer resp.Body.Close()
+
+	cbody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return &CoinGeckoResponse{}, &FrankfurterResponse{}
+	}
+
+	cgResp := CoinGeckoResponse{}
+	if err := json.Unmarshal(cbody, &cgResp); err != nil {
+		return &CoinGeckoResponse{}, &FrankfurterResponse{}
+	}
+
+	url2 := "https://api.frankfurter.dev/v1/latest"
+	resp2, err := http.Get(url2)
+	if err != nil {
+		return &CoinGeckoResponse{}, &FrankfurterResponse{}
+	}
+	defer resp2.Body.Close()
+
+	fbody, err := io.ReadAll(resp2.Body)
+	if err != nil {
+		return &CoinGeckoResponse{}, &FrankfurterResponse{}
+	}
+
+	fxResp := FrankfurterResponse{}
+	if err := json.Unmarshal(fbody, &fxResp); err != nil {
+		return &CoinGeckoResponse{}, &FrankfurterResponse{}
+	}
+
+
+
+
+	return &cgResp, &fxResp
 }

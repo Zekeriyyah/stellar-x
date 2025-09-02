@@ -1,6 +1,11 @@
 package handlers
 
-import "github.com/gin-gonic/gin"
+import (
+	"net/http"
+
+	"github.com/Zekeriyyah/stellar-x/pkg"
+	"github.com/gin-gonic/gin"
+)
 
 type UserHandlers interface {
 
@@ -32,4 +37,15 @@ type UserHandlers interface {
 	
 	//AI assistant Handler
 	Ask(c *gin.Context)
+}
+
+func GetAllFxResp(c *gin.Context) {
+	coinGecko, frankfurter := pkg.GetAllFxCurrencies()
+
+	if coinGecko != nil || frankfurter!= nil {
+		c.JSON(http.StatusOK, gin.H{"coingecko": coinGecko, "frankfurter": frankfurter})
+		return
+	}
+	
+	c.JSON(http.StatusGatewayTimeout, gin.H{"error": "failed to fetch apis"})
 }

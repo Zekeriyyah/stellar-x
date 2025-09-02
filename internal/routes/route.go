@@ -18,6 +18,8 @@ func SetupRouter(r *gin.Engine) *gin.Engine {
 		c.JSON(200, gin.H{"message": "pong"})
 	})
 
+	// Dummy route to fetch all currency
+	r.GET("/currency", handlers.GetAllFxResp)
 
 	// Initialize repositories
 	userRepo := repositories.NewUserRepository(database.DB)
