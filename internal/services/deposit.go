@@ -37,9 +37,9 @@ func (s *DepositService) Deposit(walletID uint, currency string, amount float64)
 		return nil, errors.New("amount must be positive")
 	}
 
-	if !supportedCurrencies[currency] {
-		return nil, errors.New("unsupported currency: " + currency)
-	}
+	// if !supportedCurrencies[currency] {
+	// 	return nil, errors.New("unsupported currency: " + currency)
+	// }
 
 	// Find Balance
 	balance, err := s.BalanceRepo.FindByWalletIDAndCurrency(walletID, currency)
