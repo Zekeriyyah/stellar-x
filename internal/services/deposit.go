@@ -44,7 +44,7 @@ func (s *DepositService) Deposit(walletID uint, currency string, amount float64)
 	// Find Balance
 	balance, err := s.BalanceRepo.FindByWalletIDAndCurrency(walletID, currency)
 	if err != nil {
-		return nil, fmt.Errorf("balance not found: %v", err.Error())
+		return nil, fmt.Errorf("balance not found: %v", err)
 	}
 
 	// update amount in balance
@@ -52,7 +52,7 @@ func (s *DepositService) Deposit(walletID uint, currency string, amount float64)
 	
 	// After updating balance
 	if err := s.BalanceRepo.Update(balance); err != nil {
-		return nil, fmt.Errorf("failed to update balance: %v", err.Error())
+		return nil, fmt.Errorf("failed to update balance: %v", err)
 	}
 
 	// Create transaction
@@ -67,7 +67,7 @@ func (s *DepositService) Deposit(walletID uint, currency string, amount float64)
 
 	// Save to DB
 	if err := s.TransactionRepo.CreateTransaction(transaction); err != nil {
-		return nil, errors.New("failed to save transaction: " + err.Error())
+		return nil, fmt.Errorf("failed to save transaction: %v", err)
 	}
 	return transaction, nil
 }

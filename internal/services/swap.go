@@ -50,7 +50,7 @@ func (s *SwapService) Swap(walletID uint, fromCurrency, toCurrency string,	amoun
 	rate, err := s.FXService.GetRate(fromCurrency, toCurrency)
 	if err != nil {
 		log.Println("rate: ", rate)
-		return nil, fmt.Errorf("failed to get FX rate: %v", err.Error())
+		return nil, fmt.Errorf("failed to get FX rate: %v", err)
 	}
 
 	// Calculate converted amount

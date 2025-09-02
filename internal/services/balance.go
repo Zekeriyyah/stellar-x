@@ -43,7 +43,7 @@ func (s *BalanceService) Increase(walletID uint, currency string, amount float64
 
 	balance, err := s.GetBalance(walletID, currency)
 	if err != nil {
-		return fmt.Errorf("could not get balance for the wallet: %v", err.Error())
+		return fmt.Errorf("could not get balance for the wallet: %v", err)
 	}
 
 	balance.Amount += amount
@@ -58,7 +58,7 @@ func (s *BalanceService) Decrease(walletID uint, currency string, amount float64
 
 	balance, err := s.GetBalance(walletID, currency)
 	if err != nil {
-		return fmt.Errorf("invalid currency or wallet id: %v", err.Error())
+		return fmt.Errorf("invalid currency or wallet id: %v", err)
 	}
 
 	if balance.Amount < amount {
@@ -69,7 +69,7 @@ func (s *BalanceService) Decrease(walletID uint, currency string, amount float64
 
 	// ✅ Save updated balance to database
 	if err := s.BalanceRepo.Update(balance); err != nil {
-		return fmt.Errorf("failed to update balance: %v", err.Error())
+		return fmt.Errorf("failed to update balance: %v", err)
 	}
 	return nil
 }
