@@ -2,6 +2,7 @@ package services
 
 import (
 	"errors"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -36,7 +37,7 @@ func(s *UserService) CreateUser(user *models.User) (int, string) {
 
 	err := s.userRepo.CreateUser(user)
 	if err != nil {
-		return http.StatusInternalServerError, "failed to create user"
+		return http.StatusInternalServerError, fmt.Sprintf("failed to create user: %v", err)
 	}
 
 	return 200, "user created successfully"
