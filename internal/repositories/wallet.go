@@ -40,10 +40,10 @@ func (r *WalletRepository) CreateWalletWithBalanceTx(userId uint, label string) 
 		}
 
 		balances = []models.Balance{
-			{WalletID: wallet.ID, Currency: "cNGN", Amount: 0},
-			{WalletID: wallet.ID, Currency: "cXAF", Amount: 0},
-			{WalletID: wallet.ID, Currency: "USDx", Amount: 0},
-			{WalletID: wallet.ID, Currency: "EURx", Amount: 0},
+			{WalletID: wallet.ID, Currency: "NGN", Amount: 0},
+			{WalletID: wallet.ID, Currency: "XAF", Amount: 0},
+			{WalletID: wallet.ID, Currency: "USD", Amount: 0},
+			{WalletID: wallet.ID, Currency: "EUR", Amount: 0},
 		}
 		return tx.Create(&balances).Error
 	})

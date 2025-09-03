@@ -11,12 +11,12 @@ import (
 )
 
 // Supported stablecoins
-var supportedCurrencies = map[string]bool{
-	"cNGN": true,
-	"cXAF": true,
-	"USDx": true,
-	"EURx": true,
-}
+// var supportedCurrencies = map[string]bool{
+// 	"cNGN": true,
+// 	"cXAF": true,
+// 	"USDx": true,
+// 	"EURx": true,
+// }
 
 type DepositService struct {
 	BalanceRepo *repositories.BalanceRepository
