@@ -19,8 +19,8 @@ func NewSwapHandler(swapService *services.SwapService) *SwapHandler {
 func (h *SwapHandler) Handle(c *gin.Context) {
 	var input struct {
 		WalletID     uint    `json:"walletId" binding:"required"`
-		FromCurrency string  `json:"fromCurrency" binding:"oneof=cNGN cXAF USDx EURx"`
-		ToCurrency   string  `json:"toCurrency" binding:"oneof=cNGN cXAF USDx EURx"`
+		FromCurrency string  `json:"fromCurrency" binding:"required"`
+		ToCurrency   string  `json:"toCurrency" binding:"required"`
 		Amount       float64 `json:"amount" binding:"gt=0"`
 	}
 
