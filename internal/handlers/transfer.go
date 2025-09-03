@@ -20,8 +20,8 @@ func (h *TransferHandler) Handle(c *gin.Context) {
 	var input struct {
 		SenderWalletID   uint  `json:"sender_wallet_id" binding:"required"`
 		ReceiverWalletID uint  `json:"receiver_wallet_id" binding:"required"`
-		FromCurrency     string  `json:"from_currency" binding:"oneof=cNGN cXAF USDx EURx"`
-		ToCurrency		 string	 `json:"to_currency" binding:"oneof=cNGN cXAF USDx EURx"`
+		FromCurrency     string  `json:"from_currency" binding:"required"`
+		ToCurrency		 string	 `json:"to_currency" binding:"required"`
 		Amount           float64 `json:"amount" binding:"gt=0"`
 	}
 
