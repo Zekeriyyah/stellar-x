@@ -22,11 +22,12 @@ func NewBalanceService(balRepo *repositories.BalanceRepository) *BalanceService 
 // InitializeBalances creates zero balances for all supported stablecoins
 func (s *BalanceService) InitializeBalances(walletID uint) error {
 	balances := []models.Balance{
-		{WalletID: walletID, Currency: "cNGN", Amount: 0},
-		{WalletID: walletID, Currency: "cXAF", Amount: 0},
-		{WalletID: walletID, Currency: "USDx", Amount: 0},
-		{WalletID: walletID, Currency: "EURx", Amount: 0},
+		{WalletID: walletID, Currency: "NGN", Amount: 0},
+		{WalletID: walletID, Currency: "XAF", Amount: 0},
+		{WalletID: walletID, Currency: "USD", Amount: 0},
+		{WalletID: walletID, Currency: "EUR", Amount: 0},
 	}
+
 	return s.BalanceRepo.InitBalances(balances)
 }
 
@@ -43,7 +44,7 @@ func (s *BalanceService) Increase(walletID uint, currency string, amount float64
 
 	balance, err := s.GetBalance(walletID, currency)
 	if err != nil {
-		return fmt.Errorf("could not get balance for the wallet: %v", err)
+		return fmt.Errorf("could not get balance for the wallet: %v", err.Error())
 	}
 
 	balance.Amount += amount
