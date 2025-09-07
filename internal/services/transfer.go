@@ -110,7 +110,7 @@ func (s *TransferService) Transfer(senderWalletID uint, receiverWalletID uint, f
 		Amount:           amount,
 		ConvertedAmount:  convertedAmount,
 		FxRate:           fxRate,
-		Status:			  "success" ,	
+		Status:			  "completed" ,	
 		CreatedAt:        time.Now(),
 	}
 

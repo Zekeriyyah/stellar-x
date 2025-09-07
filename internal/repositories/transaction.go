@@ -10,6 +10,10 @@ type TransactionRepository struct {
 	DB *gorm.DB
 }
 
+type IDonly struct {
+	ID uint
+}
+
 func NewTransactionRepository(db *gorm.DB) *TransactionRepository {
 	return &TransactionRepository{DB: db}
 }
@@ -29,12 +33,23 @@ func (r *TransactionRepository) GetTransactionsByWalletID(walletID uint) ([]mode
 
 // GetTransactionsByUserID uses wallet lookup
 func (r *TransactionRepository) GetTransactionsByUserID(userID uint) ([]models.Transaction, error) {
-	var wallet models.Wallet
-	err := r.DB.Select("id").First(&wallet, "user_id = ?", userID).Error
+	WalletIDs := []IDonly{}
+	err := r.DB.Model(&models.Wallet{}).Select("id").Where("user_id = ?", userID).Find(&WalletIDs).Error
 	if err != nil {
 		return nil, err
 	}
-	return r.GetTransactionsByWalletID(wallet.ID)
+	
+	transactions := []models.Transaction{}
+	for _, walletId := range WalletIDs {
+
+		tx, err := r.GetTransactionsByWalletID(walletId.ID)
+		if err != nil {
+			return transactions, err
+		}
+		transactions = append(transactions, tx...)
+	}
+
+	return transactions, nil
 }
 
 // GetRecent retrieves paginated recent transactions
