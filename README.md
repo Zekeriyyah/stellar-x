@@ -587,18 +587,18 @@ GET /api/v1/ask?q=what+is+the+latest+most+stable+coin
 </details>
 </details>
 ---
----
+```
 
 ## 🌐 Deployed Link
 
-[https://stellar-x.onrender.com](https://stellar-x.onrender.com)
+[StellarX App](https://stellar-x-ui.vercel.app/)
 
----
+```
 
 ## 📚 API Documentation
 
 ## View interactive API docs: [Postman Doc](https://documenter.getpostman.com/view/29195129/2sB3HhsMoi)
-
+```
 ## 🗺️ Entity Relationship Diagram (ERD)
 
 ```mermaid
