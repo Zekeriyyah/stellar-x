@@ -506,17 +506,14 @@ GET /api/v1/transaction/14
 
 <details>
 <summary>📁 7. Compliance Mode</summary>
-
 <details>
+<summary>✅ GET /api/v1/audit/:userId </summary>
+
 #### Request
 
 ```http
 GET /api/v1/transaction/14
 ```
-
-<details>
-<summary>✅ GET /api/v1/audit/:userId </summary>
-
 #### Response
 
 ```json
@@ -558,7 +555,6 @@ GET /api/v1/transaction/14
 > - Country
 
 </details>
-
 </details>
 
 <details>
@@ -587,18 +583,16 @@ GET /api/v1/ask?q=what+is+the+latest+most+stable+coin
 </details>
 </details>
 ---
-```
 
 ## 🌐 Deployed Link
 
 [StellarX App](https://stellar-x-ui.vercel.app/)
 
-```
 
 ## 📚 API Documentation
 
 ## View interactive API docs: [Postman Doc](https://documenter.getpostman.com/view/29195129/2sB3HhsMoi)
-```
+
 ## 🗺️ Entity Relationship Diagram (ERD)
 
 ```mermaid
